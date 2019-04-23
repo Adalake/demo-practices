@@ -5,7 +5,7 @@ PiCluster
 .. code ::
 
     PiCluster is a cluster utility lib which provides reactive programming based functions about task definning, submitting and scheduling.
-::
+.. code :: console
 
   └── cluster
       ├── __init__.py
