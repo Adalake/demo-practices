@@ -1,0 +1,350 @@
+openapi: 3.0.0
+
+servers:
+  - url: /
+info:
+  version: "1.0.0"
+  title: 后端websocket通知
+  contact:
+    email: etidor@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+
+paths:
+  /CT/event:
+    post:
+      tags:
+        - Event
+      summary: CT event
+      description: 不同的event内容，需要的通知方式不同，具体如下：
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                event:
+                  type: string
+                  description: |
+                    * poweroff means diaglog弹出，让用户确定是否关机
+                    * poweroff_start means toast弹出，提示关机开始
+                    * poweroff_cooling means toast弹出，提示正在冷却
+                    * poweroff_finished means toast弹出，提示关机结束
+                    * poweroff_running means diaglog弹出，提示正在关机，当用户在设备关机过程中又执行关机操作时会有该提示
+                    * poweroff_not_ready means diaglog弹出，表示设备现在不能关机
+                    * exp means diaglog弹出（不可关闭），这是提示医生按语音盒上的曝光按钮进行曝光
+                    * cancel_exp means 该事件是为了关闭exp事件的不可关闭弹窗，曝光结束后会有该事件
+                    * move means diaglog弹出（不可关闭），提示医生按语音盒上的移床按钮进行病床的移动
+                    * cancel_move means 移床结束后，CT会发送该事件，关闭之前的move弹窗
+                    * emg_stop means diaglog弹出（不可关闭），表示一个急停事件
+                    * cancel_emg_stop means 关闭弹出的diaglog
+                    * scc_connected means toast弹出，scc联机通知
+                    * rcc_connected means toast弹出，rcc联机通知
+                  enum:
+                    - poweroff
+                    - poweroff_start
+                    - poweroff_cooling                        
+                    - poweroff_finished
+                    - poweroff_running
+                    - poweroff_not_ready
+                    - exp
+                    - cancel_exp
+                    - move
+                    - cancel_move                      
+                    - emg_stop
+                    - cancel_emg_stop
+                    - scc_connected
+                    - rcc_connected
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Invalid Syntax
+        '405':
+          description: Method Not Allowed
+        '503':
+          description: Service Unavailable
+  /CT/system/warning:
+    post:
+      tags:
+        - Warning、Error
+      summary: CT warning
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                device:
+                  type: integer
+                  description: 代表设备号
+                  example: 1
+                code:
+                  type: integer
+                  description: 代表警告/错误代码
+                  example: 1
+                description:
+                  type: string
+                  description: 代表对应的描述信息
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Invalid Syntax
+        '405':
+          description: Method Not Allowed
+        '503':
+          description: Service Unavailable
+  /CT/system/error:
+    post:
+      tags:
+        - Warning、Error
+      summary: CT error
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                device:
+                  type: integer
+                  description: 代表设备号
+                  example: 1
+                code:
+                  type: integer
+                  description: 代表警告/错误代码
+                  example: 1
+                description:
+                  type: string
+                  description: 代表对应的描述信息
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Invalid Syntax
+        '405':
+          description: Method Not Allowed
+        '503':
+          description: Service Unavailable
+  /CT/scanning/progress:
+    post:
+      tags:
+        - Scanning
+      summary:  CT progress
+      description: 代表扫描进度
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prog_value:
+                  type: integer
+                  description: 代表当前的扫描进度
+                  example: 100
+                item_text:
+                  type: string
+                  description: 代表一些描述性的信息
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Invalid Syntax
+        '405':
+          description: Method Not Allowed
+        '503':
+          description: Service Unavailable
+  /CT/scanning/result:
+    post:
+      tags:
+        - Scanning
+      summary:  CT result
+      description: 代表扫描结果
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                uid:
+                  type: string
+                  description: 表示本次扫描的uid
+                result:
+                  type: integer
+                  description: 表示本次扫描的结果不同的代码
+                  example: 1
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Invalid Syntax
+        '405':
+          description: Method Not Allowed
+        '503':
+          description: Service Unavailable
+  /CT/scanning/finished:
+    post:
+      tags:
+        - Scanning
+      summary:  CT finished
+      description: 代表扫描结束
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                result:
+                  type: integer
+                  description: 表示扫描结束的代码
+                  example: 0
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Invalid Syntax
+        '405':
+          description: Method Not Allowed
+        '503':
+          description: Service Unavailable
+  /CT/scanning/moveto:
+    post:
+      tags:
+        - Scanning
+      summary:  CT moved
+      description: 代表从当前扫描移动到了另一个扫描
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                uid:
+                  type: string
+                  description: 表示移动到新的扫描项所对应uid
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Invalid Syntax
+        '405':
+          description: Method Not Allowed
+        '503':
+          description: Service Unavailable
+  /CT/scanning/delay:
+    post:
+      tags:
+        - Scanning
+      summary:  CT delayed
+      description: 代表扫描项被延迟
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                uid:
+                  type: string
+                  description: 表示被delay的扫描项对应的uid
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Invalid Syntax
+        '405':
+          description: Method Not Allowed
+        '503':
+          description: Service Unavailable
+  /CT/warming/progress:
+    post:
+      tags:
+        - Warming
+      summary: CT warming progress
+      description: CT预热的事件
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                value:
+                  type: integer
+                  description: 代表当前预热的进度
+                  example: 100
+                item_text:
+                  type: string
+                  description: 描述信息
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Invalid Syntax
+        '405':
+          description: Method Not Allowed
+        '503':
+          description: Service Unavailable
+  /CT/calibration/progress:
+    post:
+      tags:
+        - Calibration
+      summary: CT calibration progress
+      description: CT校准进度
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                value:
+                  type: integer
+                  description: 代表当前预热的进度
+                  example: 100
+                item_text:
+                  type: string
+                  description: 描述信息
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Invalid Syntax
+        '405':
+          description: Method Not Allowed
+        '503':
+          description: Service Unavailable
+  /CT/diagnosis:
+    post:
+      tags:
+        - Diagnosis
+      summary: CT diagnosis result
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                result:
+                  type: integer
+                  description: 代表诊断结果代码
+                  example: 0
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Invalid Syntax
+        '405':
+          description: Method Not Allowed
+        '503':
+          description: Service Unavailable
+  
