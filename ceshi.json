@@ -1,0 +1,70 @@
+{
+    "swagger": "2.0",
+    "openapi": "3.0.0",
+    "info": {
+      "description": "Book API",
+      "title": "Book API",
+      "version": "0.0.0-alpha"
+    },
+    "schemes": [
+      "http"
+    ],
+    "servers": [
+      {
+        "url": "http://localhost:8080"
+      },
+      {
+        "url": "http://localhost:8082"
+      }
+    ],
+    "paths": {
+      "/books/books": {
+        "get": {
+          "summary": "get all books.",
+          "description": "Get All Books.",
+          "parameters": [
+            {
+              "name": "book_id",
+              "in": "query",
+              "schema": {
+                "type": "integer"
+              },
+              "required": false,
+              "description": "Id of the book"
+            }
+          ],
+          "tags": [
+            "Books"
+          ],
+          "responses": {
+            "200": {
+              "description": "Books retrieved.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/projectResponse"
+                  }
+                }
+              }
+            }
+          },
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/projectRequest"
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "api_key": [
+  
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
