@@ -303,7 +303,7 @@ Python编码风格规范
 
     然后使用“myclass.MyClass”和“foo.bar.yourclass.YourClass”。
 
-* 如果想用*通配符，又不想引用模块中的所有变量，可以在模块中用变量__all__进行限制，限制只引用指定的变量名。如：
+* __init__.py文件的作用是将文件夹变为一个Python模块，\*通配符导入包的方式只能用于导入__init__.py文件，格式为：from XX import \*。因操作系统原因，必须在__init__.py文件中用变量__all__限制引用指定的变量名。如：
 
     .. code-block:: Python
 
@@ -320,7 +320,7 @@ Python编码风格规范
         def run(somewhere):
             print name,'runs', somewhere
 
-    这样当使用通配符导入这个包时，只会引入ID_one和run两个变量。
+    这样当使用*通配符导入这个包时，只会引入ID_one和run两个变量。
 
 3.8 dunder
 -------------------
@@ -817,7 +817,7 @@ Python通过类名对这些命名进行转换：如果类 Foo 有一个叫 __a �
 
 * 使用字符串方法代替字符串模块。 
 
-* 使用''.startswith()和''.endswith() 代替通过字符串切割的方法去检查前缀和后缀。 
+* 使用.startswith()和.endswith() 代替通过字符串切割的方法去检查前缀和后缀。 
 
     .. code-block:: Python
 
@@ -849,9 +849,7 @@ Python通过类名对这些命名进行转换：如果类 Foo 有一个叫 __a �
         if len(seq):
             if not len(seq):
 
-* 当有Python内置函数的时候使用内置函数，而不是自己写。
-
-    比如，当想在列表末尾添加新的对象，应该使用Python内置函数append()。这样不仅可以简化代码还能直接更改对象。
+* 当你对Python内置的可变对象（list、dictionary、set）操作时需注意，他们的内存地址是不变的，无论在哪里修改都会影响对方。若非特殊需要（如：两个线程同时操作一个队列的情况），在操作后不要更改内存地址中的内容。
 
     .. code-block:: Python
 
@@ -861,41 +859,23 @@ Python通过类名对这些命名进行转换：如果类 Foo 有一个叫 __a �
         ...
         >>> def add_item2(xs,x):
         ...     xs.append(x)
+        ...     return xs
         ...
         >>> add_item(pre,4)
         [1, 2, 3, 4]
-        >>> pre
-        [1, 2, 3]
+        >>> id(pre)
+        2369710613192
         >>> add_item2(pre,5)
-        >>> pre
         [1, 2, 3, 5]
+        >>> id(pre)
+        2369710613192
+        >>> add_item(pre,6)
+        [1, 2, 3, 5, 6]
+        >>> id(pre)
+        2369710613192
         >>>
 
-* 使用装饰器装饰类、函数去避免写重复代码。抽离出一些雷同的代码组件多个特定功能的装饰器。这样我们可以针对不同的需求使用特定的装饰器，这时因为源码去除了大量泛化的内容而使得源码具有更加清晰的逻辑。
-
-    .. code-block:: Python
-
-        class Decorator(object):
-            def __init__(self, f):
-                self.f = f
-            def __call__(self):
-                print("decorator start")
-                self.f()
-                print("decorator end")
-
-        @Decorator
-        def func():
-            print("func")
-
-        func()
-
-    这个例子在控制台打印如下：
-
-    .. code-block:: Python
-
-        decorator start
-        func
-        decorator end
+    通过上述例子可看到，当使用append()方法添加数据时，会改变对象pre地址中的内容。
 
 5.4 功能注释
 --------------
