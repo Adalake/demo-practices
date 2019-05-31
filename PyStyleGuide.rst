@@ -92,23 +92,23 @@ Python编码风格规范
         #!/usr/bin/env python3
 
         import string
-        
+
         shift = 3
         choice = input("would you like to encode or decode?")
         word = input("Please enter text")
         letters = string.ascii_letters + string.punctuation + string.digits
-        encoded = ''
+        encoded = ""
         if choice == "encode":
             for letter in word:
-                if letter == ' ':
-                    encoded = encoded + ' '
+                if letter == " ":
+                    encoded = encoded + " "
                 else:
                     x = letters.index(letter) + shift
-                    encoded=encoded + letters[x]
+                    encoded = encoded + letters[x]
         if choice == "decode":
             for letter in word:
-                if letter == ' ':
-                    encoded = encoded + ' '
+                if letter == " ":
+                    encoded = encoded + " "
                 else:
                     x = letters.index(letter) - shift
                     encoded = encoded + letters[x]
@@ -303,7 +303,7 @@ Python编码风格规范
 
     然后使用“myclass.MyClass”和“foo.bar.yourclass.YourClass”。
 
-* __init__.py文件的作用是将文件夹变为一个Python模块，\*通配符导入包的方式只能用于导入__init__.py文件，格式为：from XX import \*。因操作系统原因，必须在__init__.py文件中用变量__all__限制引用指定的变量名。如：
+* __init__.py文件的作用是将文件夹变为一个Python模块，\*通配符导入包的方式只能用于导入__init__.py文件，格式为：from xxx import \*。__all__是对模块公开接口的一种约定，如果显式声明了 __all__，import \* 就只会导入 __all__ 列出的成员。如：
 
     .. code-block:: Python
 
@@ -849,7 +849,7 @@ Python通过类名对这些命名进行转换：如果类 Foo 有一个叫 __a �
         if len(seq):
             if not len(seq):
 
-* 当你对Python内置的可变对象（list、dictionary、set）操作时需注意，他们的内存地址是不变的，无论在哪里修改都会影响对方。若非特殊需要（如：两个线程同时操作一个队列的情况），在操作后不要更改内存地址中的内容。
+* 相对于in place地修改变量，倾向于不可变数据类型。
 
     .. code-block:: Python
 
@@ -859,23 +859,15 @@ Python通过类名对这些命名进行转换：如果类 Foo 有一个叫 __a �
         ...
         >>> def add_item2(xs,x):
         ...     xs.append(x)
-        ...     return xs
         ...
         >>> add_item(pre,4)
         [1, 2, 3, 4]
-        >>> id(pre)
-        2369710613192
         >>> add_item2(pre,5)
+        >>> pre
         [1, 2, 3, 5]
-        >>> id(pre)
-        2369710613192
-        >>> add_item(pre,6)
-        [1, 2, 3, 5, 6]
-        >>> id(pre)
-        2369710613192
         >>>
 
-    通过上述例子可看到，当使用append()方法添加数据时，会改变对象pre地址中的内容。
+    如上例子，我们推荐add_item()的写法。因为add_item()返回了一个新的列表对象，并没有修改全局对象pre指向的列表对象。而add_item2()是直接在全局对象pre指针下的列表对象in place地进行了修改。
 
 5.4 功能注释
 --------------
@@ -919,4 +911,3 @@ Python通过类名对这些命名进行转换：如果类 Foo 有一个叫 __a �
 1. Python PEP 8： https://www.python.org/dev/peps/pep-0008/
 
 2. 谷歌Python风格指南： https://github.com/google/styleguide/blob/gh-pages/pyguide.md
-
