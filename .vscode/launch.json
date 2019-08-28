@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - If",
+            "request": "launch",
+            "mainClass": "If",
+            "projectName": "demo-github_b9fae06f"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Hello",
+            "request": "launch",
+            "mainClass": "Hello",
+            "projectName": "demo-github_b9fae06f"
+        }
+    ]
+}

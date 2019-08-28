@@ -1,3 +1,4 @@
+/* 基本数据类型 */
 // public class Hello {
 //     public static void main(String[] args) {
 //         System.out.println("Hello, world!");
@@ -46,18 +47,38 @@
 //字符类型 char 表示一个字符，如： char a = 'A'; char zh = '中'
 //注意char类型使用单引号'，且仅有一个字符，要和双引号"的字符串类型区分开。
 //定义变量的时候，如果加上final修饰符，这个变量就变成了常量。根据习惯，常量名通常全部大写。如： final double PI = 3.14; // PI是一个常量
+// public class Hello {
+//     public static void main(String[] args) {
+//         int[] ns = new int[5];
+//         ns[0] = 68;
+//         ns[1] = 79;
+//         ns[2] = 91;
+//         ns[3] = 85;
+//         ns[4] = 62;
+//         System.out.println(ns);       
+//     }
+// }
+
+
+// 定义一个数组类型的变量，使用数组类型“类型[]”，例如，int[]。和单个基本类型变量不同，数组变量初始化必须使用new int[5]表示创建一个可容纳5个int元素的数组。
+// 数组是引用类型，并且数组的大小不可变。数组的3种表示如下：
+
+// public class Hello {
+//     public static void main(String[] args) {
+//         int[] x = new int[5];
+//         int[] y = new int[] { 6, 7, 8, 9, 1 };
+//         int[] z = { 6, 7, 8, 9, 1 };
+//         System.out.println(x.length + y.length + z.length);
+//     }
+// }
 
 public class Hello {
     public static void main(String[] args) {
-        int[] ns = new int[5];
-        ns[0] = 68;
-        ns[1] = 79;
-        ns[2] = 91;
-        ns[3] = 85;
-        ns[4] = 62;
-        System.out.println(ns);       
+        String[] names = { "A", "B", "C" };
+        String x = names[1];
+        names[1] = "cat";
+        System.out.println(x);
     }
 }
 
-// 定义一个数组类型的变量，使用数组类型“类型[]”，例如，int[]。和单个基本类型变量不同，数组变量初始化必须使用new int[5]表示创建一个可容纳5个int元素的数组。
-// 数组是引用类型，并且数组的大小不可变。
+//以上打印"B"，不是"cat"，因为数组是引用类型而不是值类型
