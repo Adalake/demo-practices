@@ -286,41 +286,43 @@
 //     }
 // }
 
-public class Object {
-    public static void main(String[] agrs) {
-        Person ming = new Person("ming", 21);
-        System.out.println(ming.getName());
-        System.out.println(ming.getAge());
-        Person hei = new Person("ming");
-        System.out.println(hei.getName());
-        System.out.println(hei.getAge());
-        Person o = new Person(55);
-        System.out.println(o.getName());
-        System.out.println(o.getAge());
-    }
-}
+// ---------------------------------------------------------------------------
 
-class Person {
-    private String name;
-    private int age;
-    public Person(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
-    public String getName() {
-        return this.name;
-    }
-    public int getAge() {
-        return this.age;
-    }
-    public Person(String name) {
-        this.name = name;
-        this.age = 18;
-    }
-    public Person(int age) {
-        this("dada", age);   //掉用另一个构造方法public Person(String, int)
-    }
-}
+// public class Object {
+//     public static void main(String[] agrs) {
+//         Person ming = new Person("ming", 21);
+//         System.out.println(ming.getName());
+//         System.out.println(ming.getAge());
+//         Person hei = new Person("ming");
+//         System.out.println(hei.getName());
+//         System.out.println(hei.getAge());
+//         Person o = new Person(55);
+//         System.out.println(o.getName());
+//         System.out.println(o.getAge());
+//     }
+// }
+
+// class Person {
+//     private String name;
+//     private int age;
+//     public Person(String name, int age) {
+//         this.name = name;
+//         this.age = age;
+//     }
+//     public String getName() {
+//         return this.name;
+//     }
+//     public int getAge() {
+//         return this.age;
+//     }
+//     public Person(String name) {
+//         this.name = name;
+//         this.age = 18;
+//     }
+//     public Person(int age) {
+//         this("dada", age);   //掉用另一个构造方法public Person(String, int)
+//     }
+// }
 
 // 一个构造方法可以调用其他构造方法，这样做的目的是便于代码复用。调用其他构造方法的语法是this(…)
 
@@ -332,3 +334,33 @@ class Person {
 // 可以定义多个构造方法，编译器根据参数自动判断；
 
 // 可以在一个构造方法内部调用另一个构造方法，便于代码复用。
+
+
+// ---------------------------------------------------------------------------
+// 方法重载：是指多个方法的方法名相同，但各自的参数不同
+// 重载方法应该完成类似的功能，重载方法返回值类型应该相同。
+
+
+public class Object {
+    public static void main(String[] agrs) {
+        Person ming = new Person();
+        Person dada = new Person();
+        ming.setName("Xiao Ming");
+        dada.setName("Xiao", "dada");
+        System.out.println(ming.getName());
+        System.out.println(dada.getName());
+    }
+}
+
+class Person {
+    private String name;
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setName(String name, String p) {
+        this.name = name + " " + p;
+    }
+    public String getName() {
+        return this.name;
+    }
+}
