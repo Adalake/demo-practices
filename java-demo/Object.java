@@ -341,26 +341,142 @@
 // 重载方法应该完成类似的功能，重载方法返回值类型应该相同。
 
 
+// public class Object {
+//     public static void main(String[] agrs) {
+//         Person ming = new Person();
+//         Person dada = new Person();
+//         ming.setName("Xiao Ming");
+//         dada.setName("Xiao", "dada");
+//         System.out.println(ming.getName());
+//         System.out.println(dada.getName());
+//     }
+// }
+
+// class Person {
+//     private String name;
+//     public void setName(String name) {
+//         this.name = name;
+//     }
+//     public void setName(String name, String p) {
+//         this.name = name + " " + p;
+//     }
+//     public String getName() {
+//         return this.name;
+//     }
+// }
+
+// ---------------------------------------------------------------------------
+
+
+/* 继承 */
+
+// Java使用extends关键字来实现继承
+// 在OOP（面向对象）的术语中，我们把Person称为超类（super class），父类（parent class），基类（base class）
+// 把Student称为子类（subclass），扩展类（extended class）
+// 在Java中，没有明确写extends的类，编译器会自动加上extends Object。
+// 所以，任何类，除了Object，都会继承自某个类。
+// Java只允许一个class继承自一个类，因此，一个类有且仅有一个父类。只有Object特殊，它没有父类。
+
+// public class Object {
+//     public static void main(String[] agrs) {
+//         Student x = new Student();
+//         x.name = "heihie";
+//         x.day = 10;
+//         // x.age = 2;
+//         System.out.println(x.hello());
+//     }
+// }
+
+// class Person {
+//     public String name;
+//     private int age;
+//     protected int day;
+// }
+
+// class Student extends Person {
+//     public String hello() {
+//         return "Hello, " + super.name + "- protected: " + day; 
+//         // return "I am" + age;  编译错误，因为子类无法访问父类的private字段或者private方法
+//     }
+// }
+
+// 为了让子类可以访问父类的字段，我们需要把private改为protected。用protected修饰的字段可以被子类访问
+// protected关键字可以把字段和方法的访问权限控制在继承树内部
+// 一个protected字段和方法可以被其子类，以及子类的子类所访问
+
+
+/* super */
+
+// super关键字表示父类（超类）。子类引用父类的字段时，可以用super.fieldName。例如：
+
+// class Student extends Person {
+//     public String hello() {
+//         return "Hello, " + super.name;
+//     }
+// }
+
+// 子类不会继承任何父类的构造方法。子类默认的构造方法是编译器自动生成的，不是继承的。
 public class Object {
-    public static void main(String[] agrs) {
-        Person ming = new Person();
-        Person dada = new Person();
-        ming.setName("Xiao Ming");
-        dada.setName("Xiao", "dada");
-        System.out.println(ming.getName());
-        System.out.println(dada.getName());
+    public static void main(String[] args) {
+        Student s = new Student("Xiao Ming", 12, 89);
+        System.out.println(s.name + " " + s.age + " " + s.score );
     }
 }
 
 class Person {
-    private String name;
-    public void setName(String name) {
+    protected String name;
+    protected int age;
+
+    public Person(String name, int age) {
         this.name = name;
-    }
-    public void setName(String name, String p) {
-        this.name = name + " " + p;
-    }
-    public String getName() {
-        return this.name;
+        this.age = age;
     }
 }
+
+class Student extends Person {
+    protected int score;
+
+    public Student(String name, int age, int score) {
+        super(name, age);
+        this.score = score;
+    }
+}
+
+
+
+// public class Object {
+//     public static void main(String[] agrs) {
+//         Student ming = new Student("hha");
+//         System.out.println(ming.name);
+//     }
+// }
+
+// class Person {
+//     protected String name;
+//     protected int age;
+// }
+
+// class Student extends Person {
+//     public Student(String name) {
+//         this.name = name;
+//     }
+// }
+
+
+// 在Java中，任何class的构造方法，第一行语句必须是调用父类的构造方法。
+// 如果没有明确地调用父类的构造方法，编译器会帮我们自动加一句super();，所以，Student类的构造方法实际上是这样：
+// class Student extends Person {
+//     protected int score;
+//     public Student(String name, int age, int score) {
+//         super(); // 自动调用父类的构造方法
+//         this.score = score;
+//     }
+// }
+// 但是，上面这个Person类并没有无参数的构造方法，因此，编译失败。
+// 解决方法是调用Person类存在的某个构造方法。
+
+
+// ---------------------------------------------------------------------------
+
+
+// 到 super ，未完待续。。。
