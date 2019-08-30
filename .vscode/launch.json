@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Poly",
+            "request": "launch",
+            "mainClass": "Poly",
+            "projectName": "demo-github_b9fae06f"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Object",
             "request": "launch",
             "mainClass": "Object",
