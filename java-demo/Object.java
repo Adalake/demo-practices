@@ -1,4 +1,4 @@
-//-------------------------------------------------------------------》 /* 面向对象基础 */
+//-------------------------------------------------------------------》 /* 面向对象基础 */      以下每一个 Object 都是可以编译的。
 
 /* 方法 */
 
@@ -445,6 +445,8 @@
 // }
 
 
+// ---------------------------------------------------------------------------
+
 
 // public class Object {
 //     public static void main(String[] agrs) {
@@ -480,25 +482,137 @@
 
 // ---------------------------------------------------------------------------
 
+// public class Object {
+//     public static void main(String[] agrs) {
+//         Student ming = new Student("ming");
+//         System.out.println(ming.hello());
+//         Student x = new Student("x", 22);
+//         System.out.println(x.hello());
+//         Student y = new Student("y", 22, 233);
+//         System.out.println(y.hello());
+//     }
+// }
+// class Person {
+//     protected String name;
+//     protected int age;
 
-// 到 super ，未完待续。。。
+//     public Person(String name, int age) {
+//         this.name = name;
+//         this.age = age;
+//     }
+//     public Person(String name) {
+//         this.name = name;
+//     }
+// }
+// class Student extends Person {
+//     private int score = 1;
+//     public Student(String name) {
+//         super(name);
+//         this.name = name + score;
+//     }
+//     public Student(String name, int age) {
+//         super(name, age);
+//         this.name = name;
+//     }
+//     public Student(String name, int age, int score) {
+//         super(name, age);
+//         this.name = name;
+//     }
+//     public String hello() {
+//         return "hi ," + name;
+//     }
+// }
 
-public class Object {
-    public static void main(String[] agrs) {
-        Student x = new Student();
-        System.out.println(x.run());
-    }
-}
+// ---------------------------------------------------------------------------
 
-class Person {
-    protected String name;
-    public String run() {
-        return "father go";
-    }
-}
+// 向上转型的好处？
+// 继承树： Student => Person => Object 
+// 如果Student是从Person继承下来的，那么，一个引用类型为Person的变量，也可以指向Student类型的实例
+// 即， 如果： Person P = new Person();
+// 那么： Person P = new Student();
+// 这种把一个子类类型安全地变为父类类型的赋值，被称为向上转型。
+// 向上转型实际上是把一个子类型安全地变为更加抽象的父类型。父类对象可以是接口（？）
+// 向上转型时，子类单独定义的方法会丢失。
 
-class Student extends Person {
-    public String run() {
-        return "ziji go";
-    }
-}
+// public class Object {
+//     public static void main(String[] args) {
+//         // Cat animal = new Cat();   ----------------不使用向上转型
+//         // animal.eat();             ----------------不使用向上转型
+//         // Dog animalq = new Dog();  ----------------不使用向上转型       变量名不可重复
+//         // animalq.eat();            ----------------不使用向上转型
+//         // animalq.run();            ----------------不使用向上转型
+
+//         Animal animal = new Cat(); 
+//         animal.eat();
+//         animal = new Dog();
+//         animal.eat();
+//         // animal.run();  引用类型为 Animal 的变量 animal 没有 run() 方法，所以此处编译失败
+//     }
+
+// }
+// class Animal {
+//     public void eat(){
+//         System.out.println("animal eatting...");
+//     }
+// }
+// class Cat extends Animal{
+//     public void eat(){
+//         System.out.println("fff");
+//     }
+// }
+// class Dog extends Animal{
+//     public void eat(){
+//         System.out.println("bbb");
+//     }
+//     public void run(){
+//         System.out.println("rrr");
+//     }
+// }
+
+// -----------------------------------------------------------------------------
+
+// public  class Object {
+//     public static void main(String[] args) {
+//       Animal b=new Bird(); //向上转型
+//       b.eat(); 
+//       //! error: b.fly(); b虽指向子类对象，但此时丢失fly()方法
+//             Female x = new Female();   //这里因为（Human h），所以可以：Human x = new Female() ？
+//             dosleep(x);
+//     //   dosleep(new Male());
+//     //   dosleep(new Female());
+//     }
+//     public static void dosleep(Human h) {       为啥这样用 ??
+//       h.sleep();
+//     }
+//   }
+// class Animal {
+//     public void eat(){
+//       System.out.println("animal eatting...");
+//     }
+//   }
+//   class Bird extends Animal{
+//     public void eat(){
+//       System.out.println("bird eatting...");
+//     }
+//     public void fly(){
+//       System.out.println("bird flying...");
+//     }
+//   }
+//  class Human {
+//     public void sleep() {
+//       System.out.println("Human sleep..");
+//     }
+//   }
+//   class Male extends Human {
+//     @Override
+//     public void sleep() {
+//       System.out.println("Male sleep..");
+//     }
+//   }
+//   class Female extends Human {
+//     @Override
+//     public void sleep() {
+//       System.out.println("Female sleep..");
+//     }
+//   }
+
