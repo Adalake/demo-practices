@@ -525,7 +525,7 @@
 
 // ---------------------------------------------------------------------------
 
-// 向上转型的好处？
+// 向上转型的好处？  还不是很了解
 // 继承树： Student => Person => Object 
 // 如果Student是从Person继承下来的，那么，一个引用类型为Person的变量，也可以指向Student类型的实例
 // 即， 如果： Person P = new Person();
@@ -616,3 +616,86 @@
 //     }
 //   }
 
+// -----------------------------------------------------------------------------
+
+// public class Object {
+//     public static void main(String[] agrs) {
+//         // Animal x = new Cat();
+//         // x.eat();
+//         dosleep(new Male()); 
+//     }
+//     public static void dosleep(Human h) {
+//         h.sleep();
+//     }
+// }
+// class Animal {
+//     public void eat() {
+//         System.out.println("Animal eat ...");
+//     }
+// }
+// class Cat extends Animal {
+//     public void eat() {
+//         System.out.println("cat eat ...");
+//     }
+// }
+// class Human {
+//     public void sleep() {
+//         System.out.println("Human eat ...");
+//     }
+// }
+
+// class Male extends Human {
+//     public void sleepo() {     //sleep() 和 sleepO() 的区别？ 2个方法名都能编译，但返回结果不同
+//         System.out.println("Male eat ...");
+//     }
+// }
+
+// dosleep(new Male()) 可以匹配 class Male 也可以匹配 class Human，那优先级？？ 
+// 答：如果是同名方法，会优先调用子类的。
+
+// -----------------------------------------------------------------------------
+
+// 2层继承 || 定义PrimaryStudent，从Student继承，并新增一个grade字段：
+public class Object {
+    public static void main(String[] args) {
+        Person p = new Person("小明", 12);
+        Student s = new Student("小红", 20, 99);
+        Student ps = new PrimaryStudent("小军", 9, 100, 5);
+        System.out.println(ps.getScore());
+    }
+}
+
+class Person {
+    protected String name;
+    protected int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+
+    public int getAge() { return age; }
+    public void setAge(int age) { this.age = age; }
+}
+
+class Student extends Person {
+    protected int score;
+
+    public Student(String name, int age, int score) {
+        super(name, age);
+        this.score = score;
+    }
+
+    public int getScore() { return score; }
+}
+
+class PrimaryStudent extends Student {
+    private int grade;                 // #important
+    public PrimaryStudent(String name, int age, int score, int grade) {
+        super(name, age, score);       // #important
+        this.grade = grade;            // #important
+    }
+}
