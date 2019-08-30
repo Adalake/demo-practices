@@ -2,6 +2,8 @@
 
 /* 方法 */
 
+// 使用方法（method）来使外部代码可以间接修改类（class）的字段（field）
+
 // class Person {
 //     public String name;
 //     public int age;
@@ -416,31 +418,31 @@
 // }
 
 // 子类不会继承任何父类的构造方法。子类默认的构造方法是编译器自动生成的，不是继承的。
-public class Object {
-    public static void main(String[] args) {
-        Student s = new Student("Xiao Ming", 12, 89);
-        System.out.println(s.name + " " + s.age + " " + s.score );
-    }
-}
+// public class Object {
+//     public static void main(String[] args) {
+//         Student s = new Student("Xiao Ming", 12, 89);
+//         System.out.println(s.name + " " + s.age + " " + s.score );
+//     }
+// }
 
-class Person {
-    protected String name;
-    protected int age;
+// class Person {
+//     protected String name;
+//     protected int age;
 
-    public Person(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
-}
+//     public Person(String name, int age) {
+//         this.name = name;
+//         this.age = age;
+//     }
+// }
 
-class Student extends Person {
-    protected int score;
+// class Student extends Person {
+//     protected int score;
 
-    public Student(String name, int age, int score) {
-        super(name, age);
-        this.score = score;
-    }
-}
+//     public Student(String name, int age, int score) {
+//         super(name, age);
+//         this.score = score;
+//     }
+// }
 
 
 
@@ -463,7 +465,7 @@ class Student extends Person {
 // }
 
 
-// 在Java中，任何class的构造方法，第一行语句必须是调用父类的构造方法。
+// 在Java中，任何class的构造方法，第一行语句必须是调用父类的构造方法。     --------------------------------------理解----------------------------------------
 // 如果没有明确地调用父类的构造方法，编译器会帮我们自动加一句super();，所以，Student类的构造方法实际上是这样：
 // class Student extends Person {
 //     protected int score;
@@ -474,9 +476,29 @@ class Student extends Person {
 // }
 // 但是，上面这个Person类并没有无参数的构造方法，因此，编译失败。
 // 解决方法是调用Person类存在的某个构造方法。
-
+// 如果父类没有默认的构造方法，子类就必须显式调用super()并给出参数以便让编译器定位到父类的一个合适的构造方法： super(name, age); 
 
 // ---------------------------------------------------------------------------
 
 
 // 到 super ，未完待续。。。
+
+public class Object {
+    public static void main(String[] agrs) {
+        Student x = new Student();
+        System.out.println(x.run());
+    }
+}
+
+class Person {
+    protected String name;
+    public String run() {
+        return "father go";
+    }
+}
+
+class Student extends Person {
+    public String run() {
+        return "ziji go";
+    }
+}
