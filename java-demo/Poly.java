@@ -132,21 +132,21 @@
 // 使用abstract修饰的类就是抽象类。我们无法实例化一个抽象类：
 // Person p = new Person(); // 编译错误
 
-public class Poly {
-    public static void main(String[] agrs) {
-        Person x = new Student();
-        x.run();
-    }
-}
-abstract class Person {
-    public abstract void run();
-}
-class Student extends Person {
-    @Override
-    public void run() {
-        System.out.println("233hiehie");
-    }
-}
+// public class Poly {
+//     public static void main(String[] agrs) {
+//         Person x = new Student();
+//         x.run();
+//     }
+// }
+// abstract class Person {
+//     public abstract void run();
+// }
+// class Student extends Person {
+//     @Override
+//     public void run() {
+//         System.out.println("233hiehie");
+//     }
+// }
 
 // 请看抽象类的返回类型不为 void 的情况：
 // public class Poly {
@@ -163,4 +163,64 @@ class Student extends Person {
 //     public String run() {
 //         return "233";
 //     }
+// }
+
+/* 接口 */
+
+// 如果一个抽象类没有字段，所有方法全部都是抽象方法：
+// abstract class Person {
+//     public abstract void run();
+//     public abstract String getName();
+// }
+// 就可以把该抽象类改写为接口：interface。
+// 在Java中，使用interface可以声明一个接口：
+// interface Person {
+//     void run();
+//     String getName();
+// }
+
+
+// 当一个具体的class去实现一个interface时，需要使用implements关键字。
+// 我们知道，在Java中，一个类只能继承自另一个类，不能从多个类继承。
+// 但是，一个类可以实现多个interface，例如：
+// class Student implements Person, Hello { // 实现了两个interface
+//     ...
+// }
+
+public class Poly {
+    public static void main(String[] agrs) {
+        Person x = new Student("xiaohua");
+        x.run();
+        System.out.println(x.getName());
+    }
+}
+
+interface Person {
+    void run();
+    String getName();
+}
+
+class Student implements Person {
+    private String name;
+    
+    public Student(String name) {
+        this.name = name;    // 易遗漏
+    }
+    @Override
+    public void run() {
+        System.out.println("ziji go");
+    }
+    @Override
+    public String getName() {
+        return name;
+    }
+}
+
+// 一个interface可以继承自另一个interface。interface继承自interface使用extends，它相当于扩展了接口的方法。例如：
+// interface Hello {
+//     void hello();
+// }
+// interface Person extends Hello {
+//     void run();
+//     String getName();
 // }
