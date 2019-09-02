@@ -178,7 +178,8 @@
 //     void run();
 //     String getName();
 // }
-
+// 接口不能定义实例字段，接口也不能由构造函数。所以必须在实现接口的class里定义构造函数和字段。
+// 因为接口没有构造函数，所以在实现接口的 class 里不需要在构造函数里写 super()。
 
 // 当一个具体的class去实现一个interface时，需要使用implements关键字。
 // 我们知道，在Java中，一个类只能继承自另一个类，不能从多个类继承。
@@ -187,34 +188,34 @@
 //     ...
 // }
 
-public class Poly {
-    public static void main(String[] agrs) {
-        Person x = new Student("xiaohua");
-        x.run();
-        System.out.println(x.getName());
-    }
-}
+// public class Poly {
+//     public static void main(String[] agrs) {
+//         Person x = new Student("xiaohua");
+//         x.run();
+//         System.out.println(x.getName());
+//     }
+// }
 
-interface Person {
-    void run();
-    String getName();
-}
+// interface Person {
+//     void run();
+//     String getName();
+// }
 
-class Student implements Person {
-    private String name;
+// class Student implements Person {
+//     private String name;  //实例字段 String name 不能在接口定义。
     
-    public Student(String name) {
-        this.name = name;    // 易遗漏
-    }
-    @Override
-    public void run() {
-        System.out.println("ziji go");
-    }
-    @Override
-    public String getName() {
-        return name;
-    }
-}
+//     public Student(String name) {
+//         this.name = name;    // 易遗漏, Interfaces cannot have constructors
+//     }
+//     @Override
+//     public void run() {
+//         System.out.println("ziji go");
+//     }
+//     @Override
+//     public String getName() {
+//         return name;
+//     }
+// }
 
 // 一个interface可以继承自另一个interface。interface继承自interface使用extends，它相当于扩展了接口的方法。例如：
 // interface Hello {
@@ -224,3 +225,247 @@ class Student implements Person {
 //     void run();
 //     String getName();
 // }
+
+
+// 静态字段
+// public class Poly {
+//     public static void main(String[] args) {
+//         Person ming = new Person("Xiao Ming", 12);
+//         Person hong = new Person("Xiao Hong", 15);
+//         Person.number = 88;
+//         System.out.println(Person.number);
+//         // hong.number = 99;
+//         System.out.println(ming.number);
+//     }
+// }
+
+// class Person {
+//     public String name;
+//     public int age;
+
+//     public static int number;
+
+//     public Person(String name, int age) {
+//         this.name = name;
+//         this.age = age;
+//     }
+// }
+
+// 静态方法
+// public class Poly {
+//     public static void main(String[] agrs) {
+//         Person.setNumber(99);
+//         System.out.println(Person.number);
+//     }
+// }
+// class Person {
+//     public static int number;
+//     public static void setNumber(int value) {
+//         number = value;
+//     }
+// }
+// 上面这段，给 value 赋值的话，因为是只有一个独立空间的静态字段，所以 number 也会改变。因为静态方法也不属于实例，所以无法通过 this 访问。
+// 因为静态方法属于class而不属于实例，因此，静态方法内部，无法访问this变量，也无法访问实例字段，它只能访问静态字段。
+// 实例字段在每个实例中都有自己的一个独立“空间”，但是静态字段只有一个共享“空间”，所有实例都会共享该字段。
+
+// default 方法
+// public class Poly {
+//     public static void main(String[] agrs) {
+//         Person x = new Student("ns");
+//         x.run();
+//     }
+// }
+
+// interface Person {
+//     String getName();
+//     default void run() {
+//         System.out.println(getName());
+//     }
+// }
+
+// class Student implements Person {
+//     protected String name;
+//     public Student(String name) {
+//         super();
+//         this.name = name;
+//     }
+//     @Override
+//     public String getName() {
+//         return this.name;
+//     }
+// }
+// 实现类可以不必覆写default方法。default方法的目的是，当我们需要给接口新增一个方法时，会涉及到修改全部子类。
+// 如果新增的是default方法，那么子类就不必全部修改，只需要在需要覆写的地方去覆写新增方法。
+// default方法和抽象类的普通方法是有所不同的。
+// 因为interface没有字段，default方法无法访问字段，而抽象类的普通方法可以访问实例字段。
+
+// 因为interface是一个纯抽象类，所以它不能定义实例字段。
+// 但是，interface是可以有静态字段的，并且静态字段必须为final类型：
+// public interface Poly {
+//     public static final int number = 1;
+//     public static final String name = "hhh";
+// }
+// 可以简写为:
+// public interface Poly {
+//     int number = 1;
+//     String name = "hhh";
+// }
+
+/* 作用域 */
+// 定义为public的class、interface可以被其他任何类访问,不同包的也可以
+// 定义为public的field、method可以被其他类访问，前提是首先有访问class的权限
+// 定义为private的field、method无法被其他类访问
+// 由于Java支持嵌套类，如果一个类内部还定义了嵌套类，那么，嵌套类拥有访问private的权限
+// protected作用于继承关系。定义为protected的字段和方法可以被子类访问，以及子类的子类
+
+
+/* final 修饰符 */
+// 用final修饰class可以阻止被继承
+// 用final修饰method可以阻止被子类覆写
+// 用final修饰field可以阻止被重新赋值
+// 用final修饰局部变量可以阻止被重新赋值
+
+
+/* 枚举 */
+// public class Poly {
+//     public static void main(String[] agrs){
+//         weekday x = weekday.SUM;
+//         if (x==weekday.SUM) {
+//             System.out.println(x.toString());
+//         }
+//     }
+// }
+// enum weekday {
+//     SUM, 
+//     MON, 
+//     TUE;
+// }
+// enum定义的类型就是class
+// 定义的enum类型总是继承自java.lang.Enum，且无法被继承；
+// 只能定义出enum的实例，而无法通过new操作符创建enum的实例；
+// 定义的每个实例都是引用类型的唯一实例；
+
+// 例如，我们定义的Color枚举类：
+
+// public enum Color {
+//     RED, GREEN, BLUE;
+// }
+// 编译器编译出的class大概就像这样：
+
+// public final class Color extends Enum { // 继承自Enum，标记为final class
+//     // 每个实例均为全局唯一:
+//     public static final Color RED = new Color();
+//     public static final Color GREEN = new Color();
+//     public static final Color BLUE = new Color();
+//     // private构造方法，确保外部无法调用new操作符:
+//     private Color() {}
+// }
+
+/* 泛型 */
+
+// 未使用 #泛型# 前：
+// public class Poly {
+//     public static void main(String[] agrs) {
+//         Pair x = new Pair("hh","zz");
+//         System.out.println(x.getFirst());
+//     }
+// }
+// class Pair {
+//     private String first;
+//     private String last;
+//     public Pair(String first, String last) {
+//         this.first = first;
+//         this.last = last;
+//     }
+//     public String getFirst() {
+//         return first;
+//     }
+//     public String getLast() {
+//         return last;
+//     }
+// }
+
+// 使用 #泛型# :
+// public class Poly {
+//     public static void main(String[] agrs) {
+//         Pair<String> x = new Pair<String>("hh", "zz");   //可以省略后面的String，编译器可以自动推断泛型类型：Pair<String> x = new Pair<>("hh", "zz");
+//         System.out.println(x.getFirst());
+//     }
+// }
+
+// class Pair<T> {
+//     private T first;
+//     private T last;
+//     public Pair(T first, T last) {
+//         this.first = first;
+//         this.last = last;
+//     }
+//     public T getFirst() {
+//         return first;
+//     }
+//     public T getLast() {
+//         return last;
+//     }
+// }
+
+
+// 可以在接口中定义泛型类型，实现此接口的类必须实现正确的泛型类型。
+
+// import java.util.Arrays;
+// public class Poly {
+//     public static void main(String[] args) {
+//     String[] ss = new String[] { "Orange", "Apple", "Pear" };
+//     Arrays.sort(ss);
+//     System.out.println(Arrays.toString(ss));
+//     }
+// }
+
+// 因为String本身已经实现了Comparable<String>接口。如果换成我们自定义的Person类型试试：
+// import java.util.Arrays;
+// public class Poly {
+//     public static void main(String[] args) {
+//         Person[] ps = new Person[] {
+//             new Person("Bob", 61),
+//             new Person("Alice", 88),
+//             new Person("Lily", 75),
+//         };
+//         Arrays.sort(ps);
+//         System.out.println(Arrays.toString(ps));
+//     }
+// }
+// class Person implements Comparable<Person> {   //??不是很懂
+//     String name;
+//     int score;
+//     Person(String name, int score) {
+//         this.name = name;
+//         this.score = score;
+//     }
+//     public int compareTo(Person other) {
+//         return this.name.compareTo(other.name);
+//     }
+//     public String toString() {
+//         return this.name + "," + this.score;
+//     }
+// }
+
+// 静态泛型方法应该使用其他类型区分
+
+// 多个泛型.例如，我们希望Pair不总是存储两个类型一样的对象，就可以使用类型<T, K>
+public class Poly {
+    public static void main(String[] agrs) {
+        Pair<String, Integer> x = new Pair<>("hah", 233); 
+        System.out.println(x.getFirst());
+    }
+}
+class Pair<T, K> {
+    public T first;
+    public K last;
+
+    public Pair(T first, K last) {
+        this.first = first;
+        this.last = last;
+    }
+    public T getFirst() {
+        return this.first;
+    }
+}
