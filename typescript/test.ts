@@ -28,81 +28,83 @@ function foo(sample: Foo): Foo {
 
 // -------------------------------------
 
-// export interface FormConfigDef {
-//     name: string;
-//     unit: string;
-//     step: number;
-//     min: number;
-//     max: number;
-// }
-// export const getConfig = function(
-//     name: string,
-//     unit: string,
-//     step: number,
-//     min: number,
-//     max: number,
-// ):FormConfigDef {
-//     return {name, unit, step, min, max: ggg()}
-// }
+export interface FormConfigDef {
+    name: string;
+    unit: string;
+    step: number;
+    min: number;
+    max: number;
+}
+export const getConfig = function(
+    name: string,
+    unit: string,
+    step: number,
+    min: number,
+    max: number,
+):FormConfigDef {
+    return {name, unit, step, min, max}
+}
 
-// export namespace formConfigConstructor {
-//     export const tubeCurrentConfig = getConfig("hh", "hdhd", 1, 12, 21);
-//     export const rotationSpeedConfig = getConfig("ddd","erer", 55, 66, 77);
-// }
+export namespace formConfigConstructor {
+    export const tubeCurrentConfig = getConfig("hh", "hdhd", 1, 12, 21);
+    export const rotationSpeedConfig = getConfig("ddd","erer", 55, 66, 77);
+}
 
 // -------------------------------------
 
 // 以下是硬编码
-// export const tubeCurrentConfigx = {
-//         name: "hh",
-//         unit: "hdhd",
-//         step: 1,
-//         min: 12,
-//         max: 21
-// }
-// export const rotationSpeedConfigx = {
-//     name: "ddd",
-//     unit: "erer",
-//     step: 55,
-//     min: 66,
-//     max: 77
-// }
+export const tubeCurrentConfigx = {
+        name: "hh",
+        unit: "hdhd",
+        step: 1,
+        min: 12,
+        max: 21
+}
+export const rotationSpeedConfigx = {
+    name: "ddd",
+    unit: "erer",
+    step: 55,
+    min: 66,
+    max: 77
+}
 
-export interface FormConfigDef<ValueType, MarkType> {
+// -------------------------------------
+
+export interface FormConfigDefx<ValueType, MarkType> {
   name: string;
   unit: string;
   step: number;
   min: number;
   max: number;
-  value: number;
+  value: ValueType;
   mark: MarkType;
   //   formatter: (value: ValueType) => string;
 }
-export const getConfig = function<ValueType, MarkType>(
+export const getConfigx = function<ValueType, MarkType>(
   name: string,
   unit: string,
   step: number,
   min: number,
   max: number,
   value: string,
-  mark: Array<number>,
+  mark: Array<number>, 
   valueSwicher: (value: string) => number, 
   markSwitcher: (mark: Array<number>) => MarkType
-): FormConfigDef<ValueType, MarkType> {   
+): FormConfigDefx<ValueType, MarkType> {   
   return {
     name,
     unit,
     step,
     min,
     max,
-    value: valueSwicher(value), // ? 调用这个函数并返回 ValueTpye ,为什么直接 value 不可以  ====> 因为这是值类型
+    value: valueSwicher(value), // ? 调用这个函数并返回 ValueTpye ,为什么直接 value 不可以  ====> 因为这是值类型()
     mark: markSwitcher(mark)
     // formatter: (input: ValueType) => `${input} ${unit}`,
   };
 };
 
 export namespace formConfigConstructor {
-  export const tubeCurrentConfig = getConfig(
+  export const tubeCurrentConfigx = getConfigx(
     "hh",
     "hdhd",
     1,
@@ -162,3 +164,22 @@ class X implements OnInit {   //加这句仅为了下面 regions 编译不报错
 }
 
 // ================================================================
+
+enum ScanKind {
+  Axial = "轴扫"
+}
+function testFunction() {
+  const name = "A Name";
+  const scanKind = ScanKind.Axial;
+  const x = {
+      name: name,
+      value: scanKind
+  }
+  return x;
+  // return {
+  //     name: name,
+  //     value: scanKind
+  // };
+}
+
+return x 其实是缩写。
