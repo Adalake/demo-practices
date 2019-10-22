@@ -1,3 +1,5 @@
+注: lisp文件夹下的.rkt文件请用Dr.Racket打开
+
 章节1 运算
 
 (/ 10 2)
@@ -87,3 +89,52 @@ how to use animate with this picture-of-rocket:
    (place-image [a picture] 50 60
                 (empty-scene 100 60))]))
 (picture-of-rocket.v2 70)
+
+章节4 one program, many definitions
+
+(define (picture-of-rocket.v4 h)
+  (cond [(<= h (- HEIGHT (/(image-height ROCKET) 2)))
+         (place-image ROCKET 50 h
+                      (empty-scene WIDTH HEIGHT))]
+        [(> h (- HEIGHT (/(image-height ROCKET) 2)))
+         (place-image ROCKET 50 (- 60 (/(image-height ROCKET) 2))
+                      (empty-scene WIDTH HEIGHT))]
+        ))
+
+though it is good to introduce all constant definitions first, followed by the definitions of functions in decreasing order of importance. 
+
+define 可定义 常数，函数。如果函数中的变量是 define定义的，需先定义函数中的变量。
+
+As soon as DrRacket encounters a constant definition, it determines the value of the expression and then associates the name with this value. For example,
+  (define HEIGHT (* 2 CENTER))
+  (define CENTER 100)
+causes DrRacket to complain that “CENTER is used before its definition,” when it encounters the definition for HEIGHT. In contrast,
+  (define CENTER 100)
+  (define HEIGHT (* 2 CENTER))
+works as expected.
+
+------------------------------------
+
+ (define (picture-of-rocket.v4 h)
+  (cond [(<= h (- HEIGHT (/(image-height ROCKET) 2)))
+         (place-image ROCKET 50 h
+                      (empty-scene WIDTH HEIGHT))]
+        [(> h (- HEIGHT (/(image-height ROCKET) 2)))
+         (place-image ROCKET 50 (- 60 (/(image-height ROCKET) 2))
+                      (empty-scene WIDTH HEIGHT))]
+        ))
+
+------------------------------------
+
+(define WIDTH 100)
+(define HEIGHT 60)
+(define MTSCN (empty-scene WIDTH HEIGHT))
+(define ROCKET [a picture])
+(define ROCKET-CENTER-TO-TOP (- HEIGHT (/(image-height ROCKET) 2)))
+
+(define (picture-of-rocket.v5 h)
+  (cond
+    [(<= h ROCKET-CENTER-TO-TOP)
+     (place-image ROCKET 50 h MTSCN)]
+    [(> h ROCKET-CENTER-TO-TOP)
+     (place-image ROCKET 50 ROCKET-CENTER-TO-TOP MTSCN)]))
