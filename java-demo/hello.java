@@ -31,15 +31,15 @@
 
 // public class Hello {
 //     public static void main(String[] args) {
-        // float n = 100f;
-        // System.out.println("n=" + n);
-        // n = 200f;
-        // System.out.println("n=" + n);
-        // float x = n;
-        // var i = 2f;    // 用 var 定义变量，可不用写变量类型，编译器会推断。
-        // System.out.println("x=" + x);
-        // System.out.println("n=" + n);
-        // System.out.println(i);
+// float n = 100f;
+// System.out.println("n=" + n);
+// n = 200f;
+// System.out.println("n=" + n);
+// float x = n;
+// var i = 2f;    // 用 var 定义变量，可不用写变量类型，编译器会推断。
+// System.out.println("x=" + x);
+// System.out.println("n=" + n);
+// System.out.println(i);
 //     }
 // }
 
@@ -62,7 +62,6 @@
 //     }
 // }
 
-
 // 定义一个数组类型的变量，使用数组类型“类型[]”，例如，int[]。和单个基本类型变量不同，数组变量初始化必须使用new int[5]表示创建一个可容纳5个int元素的数组。
 // 数组是引用类型，并且数组的大小不可变。数组的3种表示如下：
 
@@ -81,7 +80,7 @@
 //         String x = names[1];
 //         names[1] = "cat";
 //         System.out.println(x);
-        
+
 //     }
 // }
 
@@ -92,19 +91,30 @@
 // 内存空间：
 public class Hello {
     public static void main(String[] args) {
-
-        var a = 1;
-        var b = 1;
-        var c = 1;
-        var A = a++;
-        var B = ++b;
-        c = c++;
-        System.out.println(a); // 2
-        System.out.println(b); // 2
-        System.out.println(c); // 1
-        System.out.println(A); // 1
-        System.out.println(B); // 2
+        Search a = new Search();
+        a.test();
+        int[] s = { 1, 4, 8, 0 };
+        int t = 2;
+        a.twoSum(s, t);
     }
+
 }
 
+public class Search {
+
+    public void test() {
+        System.out.println("2323");
+    }
+
+    public int[] twoSum(int[] nums, int target) {
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[j] == target - nums[i]) {
+                    return new int[] { i, j };
+                }
+            }
+        }
+        return nums;
+    }
+}
 // 注意++写在前面和后面计算结果是不同的，++n表示先加1再引用n，n++表示先引用n再加1。不建议把++运算混入到常规运算中，容易自己把自己搞懵了。
