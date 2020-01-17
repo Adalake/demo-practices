@@ -32,3 +32,11 @@ class Student extends Person {
 
 // getField: 获取一个类的public成员变量, 包括基类
 // getDeclaredField: 获取一个类的所有成员变量, 不包括基类
+
+class People {
+    private String name;
+
+    public People(String name) {
+        this.name = name;
+    }
+}

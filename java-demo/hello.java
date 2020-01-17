@@ -100,7 +100,7 @@ public class Hello {
 
 }
 
-public class Search {
+class Search {
 
     public void test() {
         System.out.println("2323");
