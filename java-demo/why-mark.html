@@ -1,0 +1,51 @@
+why-mark: 为什么类要放在对象后面才能编译通过-----------------
+<!-- ============================================================= -->
+
+Java程序设计概述
+Java程序设计环境
+Java的基础程序设计结构
+对象与类
+继承
+接口与内部类
+
+多态的条件： 继承 重写 向上转型
+<!-- ============================================================= -->
+implements关键字
+使用 implements 关键字可以变相的使java具有多继承的特性，使用范围为类继承接口的情况，可以同时继承多个接口（接口跟接口之间采用逗号分隔）。
+implements 关键字
+public interface A {
+    public void eat();
+    public void sleep();
+}
+ 
+public interface B {
+    public void show();
+}
+ 
+public class C implements A,B {
+}
+<!-- ============================================= -->
+public class Object {
+    public static void main(String[] agrs) {
+        Animal p = new Cat();
+        p.eat();
+        dosleep(new Female());
+    }
+    public static void dosleep(Human h) {
+        h.sleep();
+    }
+}
+链接到Object.java，dosleep()??
+<!-- ============================================================= -->
+
+
+继承里同名方法，优先调用子类。
+
+先跳过：向下转型， final修饰符
+
+重载 和 重写 //区分
+继承 和 组合 //区分   以及 组合 是什么？
+
+Java中可变参数的作用
+
+泛型接口?
