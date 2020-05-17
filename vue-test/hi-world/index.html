@@ -16,16 +16,32 @@
       <input type="text" v-model="inputTest" />
       <h5>{{inputTest}}</h5>
       <button v-on:click="btnClick">click</button>
+      <button @click="btnClick">click test</button>
       <ul>
         <li v-for="item in listTest">
           {{item}}
         </li>
       </ul>
+      <item-test :todo="testGo"></item-test>
       <item-test v-bind:todo="testGo"></item-test>
+      <button-counter title="props in test"></button-counter>
+      <div>{{reversedMessage}}</div>
     </div>
   </body>
 
   <script>
+    Vue.component("button-counter", {
+      // 一个组件的 data 选项必须是一个函数，因此每个实例可以维护一份被返回对象的独立的拷贝
+      data: function () {
+        return {
+          count: 0,
+        };
+      },
+      props: ["title"],
+      template:
+        ' <button v-on:click="count++">You clicked me {{ count }} times. ___ {{title}} ___</button>',
+    });
+
     Vue.component("item-test", {
       props: ["todo"],
       template: "<h2>{{todo}} + test-5</h2>",
@@ -43,6 +59,15 @@
         btnClick: function () {
           console.log("test btn", this.inputTest);
         },
+      },
+
+      computed: {
+        reversedMessage: function () {
+          return "computed test 1";
+        },
+      },
+      created: function () {
+        console.log("init");
       },
     });
   </script>
