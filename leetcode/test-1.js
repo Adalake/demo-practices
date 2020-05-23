@@ -1,3 +1,4 @@
+// 将数组内数字的和3等分
 var canThreePartsEqualSum = function (A) {
   let sum = A.reduce((acc, cur) => acc + cur); //sum数组之和
   let temp = 0; //temp累加
