@@ -1,18 +1,21 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
+    <Home />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+// import HelloWorld from "./components/HelloWorld.vue";
+import Home from "./pages/Home";
 
 export default {
   name: "App",
   components: {
-    HelloWorld // es6中如果键和值一样，只写一个
+    // HelloWorld,
+    Home // es6中如果键和值一样，只写一个
   }
 };
 </script>

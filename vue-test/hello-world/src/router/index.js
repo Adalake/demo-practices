@@ -1,4 +1,4 @@
-import Test from '../components/Test.vue';
+import Test from "../components/Test.vue";
 import Vue from "vue";
 import Router from "vue-router";
 
@@ -8,8 +8,8 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "Test",
-      component: Test
+      name: "Home",
+      component: Test,
     },
   ],
 });
