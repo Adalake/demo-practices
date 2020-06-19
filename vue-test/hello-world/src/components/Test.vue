@@ -1,5 +1,5 @@
 <template>
-  <div>2332</div>
+  <div class="test">2332</div>
 </template>
 
 <script>
@@ -11,5 +11,6 @@ export default {
 <style scoped>
 div {
   color: red;
+  border: 1px solid red;
 }
 </style>

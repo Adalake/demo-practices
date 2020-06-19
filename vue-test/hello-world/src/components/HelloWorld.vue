@@ -15,6 +15,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.hello {
+  border: 1px solid yellow;
+}
 h3 {
   margin: 40px 0 0;
 }
