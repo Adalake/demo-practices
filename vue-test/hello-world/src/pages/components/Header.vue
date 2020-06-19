@@ -1,7 +1,9 @@
  <template>
   <div>
     <div @click="clickAction">按钮{{dataTest1}}</div>
+    <div @click="clickTest">按钮2</div>
     <div class="homeHeader">我是HomeHeader+{{testInput}}</div>
+    <img :src="url" />用:src=“url"
     <div class="buttons">
       以下测试了对v-bind:class的几种使用，样式的绑定方法：
       <button :class="classObject">Button1</button>
@@ -24,6 +26,9 @@ export default {
     testInput: String
   },
   methods: {
+    clickTest() {
+      console.log("click");
+    },
     clickAction() {
       this.$emit("clickHeadAction", "子组件向父组件传值 by $emit");
     }
@@ -42,7 +47,9 @@ export default {
       },
       styleObjec2: {
         textDecoration: "underline"
-      }
+      },
+      url:
+        "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"
     };
   },
   created() {

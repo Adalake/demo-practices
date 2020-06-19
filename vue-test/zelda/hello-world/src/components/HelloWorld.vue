@@ -7,15 +7,14 @@
 <script>
 export default {
   name: "HelloWorld",
-  props: ['msg']
+  props: {
+    msg: String
+  }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.hello {
-  border: 1px solid yellow;
-}
+<style scoped lang="less">
 h3 {
   margin: 40px 0 0;
 }
