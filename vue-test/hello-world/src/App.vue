@@ -7,7 +7,10 @@
       <router-link to="/home">Go to Home</router-link>
       <router-link to="/product">Go to product</router-link>
     </div>
-    <router-view></router-view>
+    <div class="middle">middle</div>
+    <div class="bottom">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -29,6 +32,11 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   margin-top: 60px;
+  /* 撑满 */
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  min-height: 100vh;
 }
 .top {
   /* 弹性盒子 */
@@ -36,5 +44,16 @@ export default {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+  height: 100px;
+}
+.middle {
+  height: 40px;
+}
+.bottom {
+  flex: auto;
+  /* 以下，让子容器撑满 */
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
 }
 </style>
