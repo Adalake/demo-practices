@@ -3,7 +3,7 @@
     <h2>Product List One</h2>
     <ul>
       将价格使用getters属性，使其减少一半：
-      <li v-for="product in products" :key="product">
+      <li v-for="product in products" :key="product.name">
         <span class="name">{{ product.name }}</span>
         <span class="price">${{ product.price }}</span>
       </li>

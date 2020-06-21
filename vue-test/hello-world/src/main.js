@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import Vuex from "vuex";
 import store from "./store";
+import axios from "axios";
 
 Vue.use(Vuex); // 引入vuex
 // import { Button } from "ant-design-vue";
@@ -10,6 +11,7 @@ Vue.use(Vuex); // 引入vuex
 // Vue.component(Button.name, Button)
 
 Vue.config.productionTip = false;
+Vue.prototype.axios = axios;
 
 // new Vue({
 //   render: (h) => h(App),

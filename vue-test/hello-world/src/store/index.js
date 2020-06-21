@@ -28,12 +28,19 @@ export default new Vuex.Store({
   mutations: {
     //添加mutations
     minusPrice(state, payload) {
-       state.products.forEach((product) => {
+      state.products.forEach((product) => {
         product.price -= payload;
       });
     },
   },
-  actions: {},
+  actions: {
+    //添加actions
+    minusPriceAsync(context, payload) {
+      setTimeout(() => {
+        context.commit("minusPrice", payload); //context提交
+      }, 2000);
+    },
+  },
   modules: {
     count: count_store, // 分割为模块
   },

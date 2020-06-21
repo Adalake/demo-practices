@@ -2,13 +2,17 @@
   <div id="product-list-two">
     <h2>Product List Two</h2>
     <ul>
-      <li v-for="product in products" :key="product">
+      <li v-for="product in products" :key="product.name">
         <span class="name">{{ product.name }}</span>
         <span class="price">${{ product.price }}</span>
       </li>
-      <button @click="minusPrice">减少价格</button>
-      <!-- //添加按钮 -->
     </ul>
+    <!-- //添加按钮 -->
+    <button @click="minusPrice">减少价格</button>
+    <br />
+    <!-- //添加按钮 -->
+    添加按钮, 可以发现, Product List Two中的价格延迟2s后减少了5：
+    <button @click="minusPriceAsync">异步减少价格</button>
   </div>
 </template>
 
@@ -24,6 +28,9 @@ export default {
   methods: {
     minusPrice() {
       this.$store.commit("minusPrice", 2); //提交`minusPrice,payload为2
+    },
+    minusPriceAsync() {
+      this.$store.dispatch("minusPriceAsync", 5); //分发actions中的minusPriceAsync这个异步函数
     }
   }
 };

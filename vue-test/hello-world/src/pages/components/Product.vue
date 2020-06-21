@@ -14,6 +14,7 @@
 <script>
 import ProductListOne from "./ProductListOne";
 import ProductListTwo from "./ProductListTwo";
+
 export default {
   name: "Product",
   components: {
@@ -29,6 +30,16 @@ export default {
         { name: "显示屏", price: 80 }
       ]
     };
+  },
+  created: function() {
+    this.axios.get("api/seller").then(
+      res => {
+        console.log(res);
+      },
+      function(err) {
+        console.log(err);
+      }
+    );
   }
 };
 </script>

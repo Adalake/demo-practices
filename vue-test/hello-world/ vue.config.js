@@ -1,3 +1,10 @@
+const express = require("express");
+const app = express(); // 请求server
+var appData = require("./public/mock.json");
+var seller = appData;
+var apiRoutes = express.Router();
+app.use("api/seller", apiRoutes); //通过路由请求数据
+
 module.exports = {
   // 选项
 
@@ -49,7 +56,8 @@ module.exports = {
 
   chainWebpack: () => {}, // 配置 webpack-dev-server 行为。
 
-  devServer: { // 这是跨域配置c
+  devServer: {
+    // 这是跨域配置c
     open: process.platform === "darwin",
 
     host: "localhost",
@@ -62,7 +70,7 @@ module.exports = {
 
     proxy: {
       "/api": {
-        target: "http://app.rmsdmedia.com",
+        target: "http://192.168.0.102:8080/",
 
         changeOrigin: true,
 
@@ -76,9 +84,25 @@ module.exports = {
       "/foo": {
         target: "<other_url>",
       },
+      // "/product": {
+      //   target: "http://192.168.0.102:8080", // 域名 这会告诉开发服务器将任何未知请求 (没有匹配到静态文件的请求) 代理到http://localhost:8080
+      //   changOrigin: true, // 开启代理：在本地会创建一个虚拟服务端，然后发送请求的数据，并同时接收请求的数据，这样服务端和服务端进行数据的交互就不会有跨域问题
+      //   pathRewrite: {
+      //     "^/product": "", // // 替换target中的请求地址，也就是说，在请求的时候，url用'/proxy'代替'http://ip.taobao.com'
+      //   },
+      // },
     }, // string | Object
 
-    before: (app) => {},
+    before: (app) => {
+      // 配置获取本地JSON
+      app.get("api/seller", (req, res, next) => {
+        res.json({
+          // 这里是你的json内容
+          errno: 0,
+          data: seller,
+        });
+      });
+    },
   }, // CSS 相关选项
 
   css: {

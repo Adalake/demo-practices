@@ -13,7 +13,7 @@
     </section>
     <section v-else>
       <div v-if="loading">Loading...</div>
-      <div v-else v-for="currency in info" :key="currency" class="currency">
+      <div v-else v-for="currency in info" :key="currency.description" class="currency">
         {{ currency.description }}:
         <span>
           <span v-html="currency.symbol"></span>
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios"; // 已经在根实例配置了，此处无需再import
 
 export default {
   name: "Card",
@@ -48,7 +48,7 @@ export default {
     }
   },
   mounted() {
-    axios
+    this.axios
       .get("https://api.coindesk.com/v1/bpi/currentprice.json")
       .then(response => (this.info = response.data.bpi))
       .catch(error => console.log(error))
