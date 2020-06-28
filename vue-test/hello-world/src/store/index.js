@@ -3,6 +3,7 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 import count_store from "./modules/count_store.js";
+import websocket from "./modules/websocket.js";
 
 export default new Vuex.Store({
   state: {
@@ -43,6 +44,7 @@ export default new Vuex.Store({
   },
   modules: {
     count: count_store, // 分割为模块
+    store: websocket
   },
 });
 // 当应用比较简单时，可以把状态都写在一个store对象index.js里，

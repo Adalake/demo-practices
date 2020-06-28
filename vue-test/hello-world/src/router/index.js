@@ -3,6 +3,8 @@ import Router from "vue-router";
 import Test from "../components/Test.vue";
 import Home from "../pages/Home.vue";
 import Product from "../pages/components/Product.vue";
+import Send from "../pages/components/Send.vue";
+
 Vue.use(Router);
 
 const routes = [
@@ -20,6 +22,11 @@ const routes = [
     path: "/product",
     name: 'Product',
     component: Product,
+  },
+  {
+    path: "/send",
+    name: 'Send',
+    component: Send,
   },
 ];
 export default new Router({

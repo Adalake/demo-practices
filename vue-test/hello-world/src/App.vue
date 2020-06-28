@@ -6,6 +6,7 @@
       <router-link to="/test">Go to Foo</router-link>
       <router-link to="/home">Go to Home</router-link>
       <router-link to="/product">Go to product</router-link>
+      <router-link to="/send">Go to send</router-link>
     </div>
     <div class="middle">
       <div class="left">left</div>
@@ -85,8 +86,8 @@ export default {
   flex-direction: column;
 }
 .center-box {
-   height: 40px;
-   display: -webkit-flex;
+  height: 40px;
+  display: -webkit-flex;
 }
 .center-item {
   width: 20px;
