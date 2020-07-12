@@ -5,27 +5,44 @@ import Home from "../pages/Home.vue";
 import Product from "../pages/components/Product.vue";
 import Send from "../pages/components/Send.vue";
 
-Vue.use(Router);
+// Vue.use(Router);
+if (!window.VueRouter) Vue.use(Router);
+
+const main = () => import("@/views/Main");
+import home from "@/views/home";
+import about from "@/views/about";
 
 const routes = [
   {
+    path: "/main",
+    component: main,
+  },
+  {
+    path: "/home",
+    component: home,
+  },
+  {
+    path: "/about",
+    component: about,
+  },
+  {
     path: "/test",
-    name: 'Test',
+    name: "Test", // name the route
     component: Test,
   },
   {
     path: "/home",
-    name: 'Home',
+    name: "Home",
     component: Home,
   },
   {
     path: "/product",
-    name: 'Product',
+    name: "Product",
     component: Product,
   },
   {
     path: "/send",
-    name: 'Send',
+    name: "Send",
     component: Send,
   },
 ];

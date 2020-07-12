@@ -7,6 +7,7 @@
       <router-link to="/home">Go to Home</router-link>
       <router-link to="/product">Go to product</router-link>
       <router-link to="/send">Go to send</router-link>
+      <router-link to="/main">try me</router-link>
     </div>
     <div class="middle">
       <div class="left">left</div>

@@ -8,7 +8,7 @@
 <script>
 import HomeHeader from "./components/Header";
 import Main from "./components/Main";
-
+ 
 export default {
   name: "Home",
   components: {

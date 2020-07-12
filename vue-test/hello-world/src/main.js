@@ -5,9 +5,9 @@ import Vuex from "vuex";
 import store from "./store";
 import axios from "axios";
 // import VueSocketIO from "vue-socket.io";
-import websocket from './store/modules/websocket'
-
+import websocket from "./store/modules/websocket";
 Vue.use(Vuex); // 引入vuex
+
 // Vue.use(
 //   new VueSocketIO({
 //     debug: true,
