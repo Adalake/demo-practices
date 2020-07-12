@@ -1,37 +1,31 @@
 <template>
   <div id="app">
     <div class="top">
-      <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
       <HelloWorld msg="Welcome to Your Vue.js App" />
-      <router-link to="/test">Go to Foo</router-link>
-      <router-link to="/home">Go to Home</router-link>
+      <!-- <router-link to="/test">Go to Foo</router-link>
+      <router-link to="/home">Go to Home</router-link>-->
       <router-link to="/product">Go to product</router-link>
-      <router-link to="/send">Go to send</router-link>
-      <router-link to="/main">try me</router-link>
+      <!-- <router-link to="/send">Go to send</router-link> -->
+      <router-link to="/main">
+        <!-- <mainCourse></mainCourse> -->to main
+      </router-link>
     </div>
     <div class="middle">
-      <div class="left">left</div>
-      <div class="right">
-        <div>right1</div>
-        <div>right2</div>
-      </div>
-    </div>
-    <div class="center-box">
-      <div class="center-item"></div>
-    </div>
-    <div class="bottom">
-      <router-view></router-view>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
     </div>
   </div>
 </template>
 
 <script>
 import HelloWorld from "./components/HelloWorld.vue";
-
+// import main from "@/views/main";
 export default {
   name: "App",
   components: {
-    HelloWorld // es6中如果键和值一样，只写一个
+    HelloWorld, // es6中如果键和值一样，只写一个
+    // mainCourse: main
   }
 };
 </script>

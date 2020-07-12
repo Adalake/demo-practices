@@ -4,30 +4,35 @@ import router from "./router";
 import Vuex from "vuex";
 import store from "./store";
 import axios from "axios";
-// import VueSocketIO from "vue-socket.io";
 import websocket from "./store/modules/websocket";
+import {
+  Button,
+  Select,
+  Tabs,
+  TabPane,
+  Menu,
+  MenuItem,
+  Submenu,
+  Pagination,
+  Table,
+  TableColumn,
+} from "element-ui";
+
 Vue.use(Vuex); // 引入vuex
-
-// Vue.use(
-//   new VueSocketIO({
-//     debug: true,
-//     // 服务器端地址
-//     connection: "http://localhost:3000",
-//     vuex: {},
-//   })
-// );
-
-// import { Button } from "ant-design-vue";
-// import 'ant-design-vue/lib/button/style/css'
-// Vue.component(Button.name, Button)
 
 Vue.config.productionTip = false;
 Vue.prototype.axios = axios;
 Vue.prototype.$websocket = websocket;
-
-// new Vue({
-//   render: (h) => h(App),
-// }).$mount("#app");
+Vue.use(Button);
+Vue.use(Select);
+Vue.use(Tabs);
+Vue.use(TabPane);
+Vue.use(Menu);
+Vue.use(MenuItem);
+Vue.use(Submenu);
+Vue.use(Pagination);
+Vue.use(Table);
+Vue.use(TableColumn);
 
 new Vue({
   el: "#app",

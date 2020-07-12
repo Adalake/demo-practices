@@ -1,17 +1,12 @@
 module.exports = {
-  presets: [
-    "@vue/cli-plugin-babel/preset",
-    ["@babel/preset-env", { modules: false }],
-  ],
+  presets: [["@babel/preset-env", { modules: false }]],
   plugins: [
     [
-      "import",
+      "component",
       {
-        libraryName: "vant",
-        libraryDirectory: "es",
-        style: true,
+        libraryName: "element-ui",
+        styleLibraryName: "theme-chalk",
       },
-      "vant",
     ],
   ],
 };
