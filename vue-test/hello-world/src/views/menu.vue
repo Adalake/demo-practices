@@ -2,14 +2,23 @@
   <div>
     menu
     <div>
-      <el-table
+      <!-- <el-table
         :data="tableData3.slice((currentPage-1)*pagesize,currentPage*pagesize)"
         style="width: 100%"
       >
         <el-table-column prop="date" label="日期" width="180"></el-table-column>
         <el-table-column prop="name" label="姓名" width="180"></el-table-column>
         <el-table-column prop="address" label="地址"></el-table-column>
-      </el-table>
+      </el-table>-->
+
+      <div :data="tableData3.slice((currentPage-1)*pagesize,currentPage*pagesize)">
+        2
+        <p>2dd</p>
+        <p>2dd</p>
+        <p>2dd</p>
+        <p>2dd</p>
+        <p>2dd</p>
+      </div>
 
       <el-pagination
         :page-size="2"
