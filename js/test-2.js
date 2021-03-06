@@ -49,4 +49,18 @@ function throttle1(delay = 1000) {
 }
 betterFn2 = this.throttle1(1000);
 
+//柯里化 
+//把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，并且返回一个新的函数的技术，新函数接受余下参数并返回运算结果。
+function x(a) {
+  function y(b) {
+    return a + b;
+  }
+  return y;
+}
+
+var a = this.x(5);
+a(7);
+console.log(a(7)) //12
+
+//执行区
 this.test1();
