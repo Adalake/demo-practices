@@ -89,6 +89,21 @@ async function test3_1() {
   }
 }
 
+// [] 可以动态访问的属性名，可以在程序运行时创建和修改属性，点操作符就不行
+
+function test3_3() {
+  var obj = {};
+  obj.name = "张三";
+  var myName = "name";
+  console.log(obj.myName); //undefined,访问不到对应的属性
+  console.log(obj[myName]); //张三
+  var person = {
+    name: "gogo",
+  };
+  console.log(person["name"]); //gogo
+  console.log(person.name); //gogo
+}
+
 // this.test0();
 // this.test1();
 // this.test2();
