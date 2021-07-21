@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+ 
+<body>
+    <div id="app">
+        {{ message }}
+         <div @click="test2">按钮2</div>
+        <ol>
+            <li v-for="todo in todos">
+                {{ todo.text }}
+            </li>
+        </ol>
+        {{testGetData}} ===
+    </div>
+</body>
+ 
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!',
+            todos: [
+                { text: '1212' },
+                { text: '21312' },
+                { text: '1233' }
+            ],
+            testGetData: ''
+        },
+        methods: {
+            test2() {
+                this.message = 'change'
+            },
+            test() {
+                console.log(11)
+                this.testGet()
+            }, 
+        },
+        mounted() {
+             console.log('钩子')
+        }
+    })
+</script>
+ 
+</html>
