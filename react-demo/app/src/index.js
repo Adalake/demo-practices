@@ -12,26 +12,32 @@
 // );
 //  reportWebVitals();
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
 class Square extends React.Component {
   render() {
     return (
-      <button className="square">
-        {/* TODO */}
+      <button
+        className="square"
+        onClick={() => {
+          alert(this.props.value);
+        }}
+      >
+        {this.props.value}
       </button>
     );
   }
 }
 
 class Board extends React.Component {
+  // 传递一个名为 value 的 prop 到 Square 当中：
   renderSquare(i) {
-    return <Square />;
+    return <Square value={i} />;
   }
 
   render() {
-    const status = 'Next player: X';
+    const status = "Next player: X";
 
     return (
       <div>
@@ -72,8 +78,4 @@ class Game extends React.Component {
   }
 }
 
-
-ReactDOM.render(
-  <Game />,
-  document.getElementById('root')
-);
+ReactDOM.render(<Game />, document.getElementById("root"));
