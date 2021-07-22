@@ -16,15 +16,23 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 class Square extends React.Component {
+  // 向这个 class 中添加一个构造函数，用来初始化 state
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: null,
+    };
+  }
   render() {
     return (
       <button
         className="square"
         onClick={() => {
-          alert(this.props.value);
+          this.setState({ value: "X" });
         }}
       >
-        {this.props.value}
+        {/* {this.props.value} */}
+        {this.state.value}
       </button>
     );
   }
@@ -38,7 +46,6 @@ class Board extends React.Component {
 
   render() {
     const status = "Next player: X";
-
     return (
       <div>
         <div className="status">{status}</div>
