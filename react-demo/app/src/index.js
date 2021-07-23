@@ -16,32 +16,40 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 class Square extends React.Component {
-  // 向这个 class 中添加一个构造函数，用来初始化 state
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: null,
-    };
-  }
+  // 现在我们从 Board 组件向 Square 组件中传递两个 props 参数：value 和 onClick。
+  // onClick prop 是一个 Square 组件点击事件监听函数。
   render() {
     return (
-      <button
-        className="square"
-        onClick={() => {
-          this.setState({ value: "X" });
-        }}
-      >
-        {/* {this.props.value} */}
-        {this.state.value}
+      <button className="square" onClick={() => this.props.onClick()}>
+        {this.props.value}
       </button>
     );
   }
 }
 
 class Board extends React.Component {
+  // 向这个 class 中添加一个构造函数，用来初始化 state
+  constructor(props) {
+    super(props);
+    this.state = {
+      squares: Array(9).fill(null),
+    };
+  }
+
+  handleClick(i) {
+    const squares = this.state.squares.slice();
+    squares[i] = "X";
+    this.setState({ squares: squares });
+  }
+
   // 传递一个名为 value 的 prop 到 Square 当中：
   renderSquare(i) {
-    return <Square value={i} />;
+    return (
+      <Square
+        value={this.state.squares[i]}
+        onClick={() => this.handleClick(i)}
+      />
+    );
   }
 
   render() {
